@@ -6,7 +6,7 @@ import './App.css';
 class TextField extends Component {
   render() {
     return (
-        <input type="text" name={this.props.fieldName} id={this.props.fieldName} onInput={this.handleNameChange} onBlur={this.handleBlur}/>
+        <input type="text" name={this.props.fieldName} id={this.props.fieldName}  className={this.props.className} onInput={this.props.onNameChange} onBlur={this.props.onBlur}/>
     );
   }
 }
@@ -14,7 +14,7 @@ class TextField extends Component {
 class SpanField extends Component {
   render() {
     return (
-        <span id={this.props.fieldName} className={"editable " + this.props.hiddenFieldClassName}>{this.props.fieldValue}</span>
+        <span id={this.props.fieldName} className={"editable " + this.props.className} onClick={this.props.onEditableFieldClick}>{this.props.fieldValue}</span>
     );
   }
 }
@@ -25,24 +25,49 @@ class EditableField extends Component {
     this.fieldName = props.fieldName;
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.state = {};
+    this.handleEditableFieldClick = this.handleEditableFieldClick.bind(this);
+    this.state = {
+      hideInputField: false,
+      hideEditableField: true
+    };
   }
 
   handleNameChange(e) {
-    console.log(e)
     this.setState({fieldValue: e.target.value});
   }
 
   handleBlur(e) {
-    console.log(e);
+    this.setState({
+      hideInputField: true,
+      hideEditableField: false
+    });
+  }
+
+  handleEditableFieldClick(e) {
+    this.setState({
+      hideInputField: false,
+      hideEditableField: true
+    });
+  }
+
+  setHiddenState(isHidden) {
+    return isHidden? "hidden" : "";
   }
 
   render() {
     return (
       <div>
-        <label htmlFor={this.fieldName}>{this.fieldName}</label>
-        <TextField fieldName={this.fieldName} onNameChange={this.handleNameChange} onBlur={this.handleBlur}/>
-        <SpanField fieldName={this.fieldName + "Editable"} fieldValue={this.state.fieldValue} />
+        <label htmlFor={this.fieldName}>{this.fieldName}: </label>
+        <TextField fieldName={this.fieldName}
+                   onNameChange={this.handleNameChange}
+                   onBlur={this.handleBlur}
+                   className={this.setHiddenState(this.state.hideInputField)}
+        />
+        <SpanField fieldName={this.fieldName + "Editable"}
+                   fieldValue={this.state.fieldValue}
+                   onEditableFieldClick={this.handleEditableFieldClick}
+                   className={this.setHiddenState(this.state.hideEditableField)}
+        />
       </div>
     );
   }
