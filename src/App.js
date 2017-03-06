@@ -6,7 +6,14 @@ import './App.css';
 class TextField extends Component {
   render() {
     return (
-        <input type="text" name={this.props.fieldName} id={this.props.fieldName}  className={this.props.className} onInput={this.props.onTextChange} onBlur={this.props.onBlur}/>
+        <input type="text"
+               name={this.props.fieldName}
+               id={this.props.fieldName}
+               className={this.props.className}
+               onInput={this.props.onTextChange}
+               onBlur={this.props.onBlur}
+               onKeyDown={this.props.onKeyDown}
+        />
     );
   }
 }
@@ -14,7 +21,12 @@ class TextField extends Component {
 class SpanField extends Component {
   render() {
     return (
-        <span id={this.props.fieldName} className={"editable " + this.props.className} onClick={this.props.onEditableFieldClick}>{this.props.fieldValue}</span>
+        <span id={this.props.fieldName}
+              className={"editable " + this.props.className}
+              onClick={this.props.onEditableFieldClick}
+        >
+          {this.props.fieldValue}
+        </span>
     );
   }
 }
@@ -54,6 +66,11 @@ class EditableField extends Component {
     return isHidden? "hidden" : "";
   }
 
+  keyDown = (e) => {
+    if(e.keyCode === 13) { this.handleInputFieldBlur(e) }           // Enter
+    else if (e.keyCode === 27) { this.handleInputFieldBlur(e) }     // Escape, needs to reset field to before
+  };
+
   render() {
     return (
       <div>
@@ -61,6 +78,7 @@ class EditableField extends Component {
         <TextField fieldName={this.fieldName}
                    onTextChange={this.handleTextChange}
                    onBlur={this.handleInputFieldBlur}
+                   onKeyDown={this.keyDown}
                    className={this.setHiddenState(this.state.hideInputField)}
         />
         <SpanField fieldName={this.fieldName + "Editable"}
