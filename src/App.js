@@ -4,6 +4,22 @@ import './App.css';
 
 
 class TextField extends Component {
+  render() {
+    return (
+        <input type="text" name={this.props.fieldName} id={this.props.fieldName} onInput={this.handleNameChange} onBlur={this.handleBlur}/>
+    );
+  }
+}
+
+class SpanField extends Component {
+  render() {
+    return (
+        <span id={this.props.fieldName} className={"editable " + this.props.hiddenFieldClassName}>{this.props.fieldValue}</span>
+    );
+  }
+}
+
+class EditableField extends Component {
   constructor(props) {
     super(props);
     this.fieldName = props.fieldName;
@@ -13,28 +29,30 @@ class TextField extends Component {
   }
 
   handleNameChange(e) {
+    console.log(e)
     this.setState({fieldValue: e.target.value});
   }
 
   handleBlur(e) {
-
+    console.log(e);
   }
 
   render() {
     return (
       <div>
         <label htmlFor={this.fieldName}>{this.fieldName}</label>
-        <input type="text" name={this.fieldName} id={this.fieldName} onInput={this.handleNameChange} onBlur={this.handleBlur}/>
-        <span id="{this.fieldName}+Editable">{this.state.fieldValue}</span>
+        <TextField fieldName={this.fieldName} onNameChange={this.handleNameChange} onBlur={this.handleBlur}/>
+        <SpanField fieldName={this.fieldName + "Editable"} fieldValue={this.state.fieldValue} />
       </div>
     );
   }
 }
+
 class FormElements extends Component {
   render() {
     return (
       <div>
-        <TextField fieldName="Name" />
+        <EditableField fieldName="Name"/>
       </div>
     );
   }
