@@ -6,7 +6,7 @@ import './App.css';
 class TextField extends Component {
   render() {
     return (
-        <input type="text" name={this.props.fieldName} id={this.props.fieldName}  className={this.props.className} onInput={this.props.onNameChange} onBlur={this.props.onBlur}/>
+        <input type="text" name={this.props.fieldName} id={this.props.fieldName}  className={this.props.className} onInput={this.props.onTextChange} onBlur={this.props.onBlur}/>
     );
   }
 }
@@ -23,8 +23,8 @@ class EditableField extends Component {
   constructor(props) {
     super(props);
     this.fieldName = props.fieldName;
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleInputFieldBlur = this.handleInputFieldBlur.bind(this);
     this.handleEditableFieldClick = this.handleEditableFieldClick.bind(this);
     this.state = {
       hideInputField: false,
@@ -32,11 +32,11 @@ class EditableField extends Component {
     };
   }
 
-  handleNameChange(e) {
+  handleTextChange(e) {
     this.setState({fieldValue: e.target.value});
   }
 
-  handleBlur(e) {
+  handleInputFieldBlur(e) {
     this.setState({
       hideInputField: true,
       hideEditableField: false
@@ -59,8 +59,8 @@ class EditableField extends Component {
       <div>
         <label htmlFor={this.fieldName}>{this.fieldName}: </label>
         <TextField fieldName={this.fieldName}
-                   onNameChange={this.handleNameChange}
-                   onBlur={this.handleBlur}
+                   onTextChange={this.handleTextChange}
+                   onBlur={this.handleInputFieldBlur}
                    className={this.setHiddenState(this.state.hideInputField)}
         />
         <SpanField fieldName={this.fieldName + "Editable"}

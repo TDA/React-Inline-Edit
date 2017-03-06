@@ -31,4 +31,6 @@
   display: inline-block;
   min-width: 1em;
   border-bottom: dashed 1px blue;
+  cursor: pointer;
+  tab-index: 1;
 }
