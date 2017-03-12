@@ -7,3 +7,7 @@
 ### React inline select fields
 * Worked on this idea through the weekend
 * Is confidential, so cannot post here without sanitization
+* Uses select fields in a matrix
+* Each field is a React component
+* Once the fields are filled, it totals it, and displays the value.
+* Also calculates based on the value, a conclusion for the data.
