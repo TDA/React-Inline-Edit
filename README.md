@@ -2,6 +2,9 @@
 * Hackathon idea - React based inline edit feature
 * Worked on this as a confidential project
 * Will sanitize code and commit later.
+* Assume that the fields are all text/date/select fields.
+* The idea is to allow inline edit, with a way for the user to know that they are in edit mode.
+* After the edits are done, allow user to save the data, or cancel.
 
 
 ### React inline select fields
