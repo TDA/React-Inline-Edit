@@ -14,3 +14,8 @@
 * Each field is a React component
 * Once the fields are filled, it totals it, and displays the value.
 * Also calculates based on the value, a conclusion for the data.
+
+### Config generator
+* Worked on an idea for generating configs with user input
+* This will save a lot of time when creating new configs
+* Need to work on a front-end for this
