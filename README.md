@@ -19,3 +19,9 @@
 * Worked on an idea for generating configs with user input
 * This will save a lot of time when creating new configs
 * Need to work on a front-end for this
+
+### Reactifying existing Rails app
+* Now able to comfortably retrofit React into rails apps
+* ERB essentially now renders a component
+* More manipulation with JS, combined with back-end functionality with Rails.
+
